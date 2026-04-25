@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUPER WHEELS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* HEADER  */
+header {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 60px; 
+  padding: 0 60px;
+  border-bottom: 1px solid #ffffff20;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  position: absolute;
+  left: 30px;
+  top: 60%;
+  transform: translateY(-50%);
+}
+
+.logo img {
+  height: 85px;
+}
+
+/* PREMIUM NAVIGATION LINKS */
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* THE GLOW / REFLECTION EFFECT */
+nav a:hover {
+  color: #fff;
+  
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* SLEEK UNDERLINE REFLECTION */
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ALIGNED HEADER CONTROLS (Search + Menu) */
+.header-controls {
+  position: absolute;
+  right: 60px;
+  display: flex;
+  align-items: center;
+  gap: 25px; 
+}
+
+.sound-toggle, .search-icon, .menu {
+  font-size: 20px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sound-toggle:hover, .search-icon:hover, .menu:hover {
+  color: #fff;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+  transform: scale(1.15); /* Slight pop-out */
+}
+
+.menu {
+  font-size: 24px; 
+}
+
+/* HERO */
+.hero {
+  height: 100vh;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  background-image: radial-gradient(circle, rgba(0,0,0,0) 0%, #000 85%); 
+  box-shadow: inset 0 0 150px rgba(0,0,0,1); 
+
+  
+}
+
+/* INTRO TEXT - THE FROSTED PILL BACKGROUND */
+.welcome-badge {
+  position: absolute;
+  top: 12%; 
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 25px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.shiny-text {
+  letter-spacing: 4px; 
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 600;
+  
+  background: linear-gradient(90deg, #777777 0%, #ffffff 50%, #777777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-title-wrapper {
+  position: absolute;
+  top: 17%; 
+  width: 100%;
+  text-align: center;
+  z-index: 1; 
+}
+
+.title-front, .title-shadow {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(50px, 7.8vw, 120px);
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0;
+  position: absolute; 
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+.title-shadow {
+  color: transparent; 
+  z-index: 1;
+  text-shadow: 
+    0px 1px 0px #a0a0a0,  
+    0px 2px 0px #888888,  
+    0px 3px 0px #707070,  
+    0px 4px 0px #555555,  
+    0px 5px 0px #3b3b3b,  
+    0px 6px 0px #222222,  
+    0px 15px 30px rgba(0, 0, 0, 0.95); 
+}
+
+.title-front {
+  z-index: 2; 
+  background: linear-gradient(
+    to bottom, 
+    #ffffff9a 20%, 
+    #a0a0a0cc 30%, 
+    #111111 50%, 
+    #dddddd10 80%, 
+    #332f2f46 90%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.car-wrapper {
+  position: absolute;
+  z-index: 3; 
+  bottom: -2vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65vw;              
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* CAR IMAGE */
+/* CAR GLOW EFFECT */
+.floor-light {
+  position: absolute;
+  bottom: 12%; 
+  left: 50%;
+  transform: translateX(-50%) rotateX(75deg); 
+  width: 120vw;
+  height: 50vh;
+  background: radial-gradient(ellipse at center, rgba(60, 70, 80, 0.4) 0%, rgba(0,0,0,0) 65%);
+  z-index: 1; 
+}
+
+.car-shadow {
+  position: absolute;
+  bottom: 16%; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%; 
+  height: 20px; 
+  background: #000;
+  border-radius: 50%;
+  box-shadow: 0 0 20px 15px #000, 0 10px 50px 30px rgba(0,0,0,0.9);
+  z-index: 2; 
+}
+
+.car-glow {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.327) 0%, transparent 60%);
+  filter: blur(60px);
+  z-index: 1; 
+}
+
+.hero-car {
+  position: relative;
+  z-index: 3;  
+  width: 100%;      
+  opacity: 1;              
+  filter: brightness(0.95) contrast(1.4) drop-shadow(0 30px 25px rgba(0,0,0,0.9)); 
+  -webkit-box-reflect: below -8px linear-gradient(transparent 70%, rgba(255,255,255,0.25));
+}
+
+/* SEARCH */
+.search-box {
+  display: flex; 
+  gap: 10px; 
+  position: absolute; 
+  top: 88%; 
+  z-index: 5; 
+}
+
+
+
+.search-box input {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: none;
+  width: 280px;
+  outline: none;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+}
+
+/* SEARCH INPUT HOVER/FOCUS */
+.search-box input:hover, .search-box input:focus {
+  background: linear-gradient(120deg, #b0b0b0 25%, #ffffff 50%, #b0b0b0 75%);
+  background-size: 200% auto;
+  
+  color: #000;
+  caret-color: #000; 
+  
+  box-shadow: 0 0 15px rgba(255,255,255,0.6), inset 0 0 10px rgba(255,255,255,0.8);
+  transform: scale(1.05);
+  
+  animation: shine 1.5s linear infinite;
+}
+
+.search-box input:hover::placeholder, .search-box input:focus::placeholder {
+  color: #555555;
+}
+
+.btn {
+  padding: 12px 40px;
+  border-radius: 30px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* BUTTON HOVER */
+.btn:hover, .search-btn:hover {
+  background: linear-gradient(120deg, #0a0a0a 25%, #666666 50%, #0a0a0a 75%);
+  
+  background-size: 200% auto;
+  color: #fff;
+  
+  box-shadow: 0 0 20px rgba(255,255,255,0.4), inset 0 0 10px rgba(255,255,255,0.2);
+  transform: scale(1.1);
+  
+  animation: shine 1.5s linear infinite;
+}
+
+/* THE ANIMATION FRAME */
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+
+/* HEADLIGHT */
+.headlight {
+  position: absolute;
+  border-radius: 50%;
+  width: 35px;
+  height: 28px;
+  background: #ffffff;
+  box-shadow: 
+    0 0 15px 5px rgba(255, 255, 255, 0.9), 
+    0 0 40px 15px rgba(58, 125, 226, 0.7);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: 0.3s;
+  z-index: 4;
+}
+
+/* POSITION CONTROLS */
+.left-outer-light { left: 20.5%; bottom: 44.5%;}
+.left-inner-light { left: 26%; bottom: 43.2%; }
+
+.right-inner-light { right: 19.7%; bottom: 44.3%; }
+.right-outer-light { right: 25.7%; bottom: 43%; }
+
+/* BEAM */
+.beam {
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  border-radius: 50%;
+  background: linear-gradient(to right, rgba(255,255,255,0.18), transparent);
+  filter: blur(18px);
+  mix-blend-mode: screen;
+  opacity: 0;
+  z-index: 4;
+}
+
+.left-beam { 
+  left: 7%; 
+  bottom: 15%; 
+  transform: skewX(180deg); 
+}
+
+.right-beam { 
+  right: -5%; 
+  bottom: 15%; 
+  transform: skewX(20deg); 
+}
+
+.on { 
+  opacity: 1 !important; 
+  transform: scale(1.15); 
+}
+
+/* SECOND SECTION */
+.section {
+  padding: 120px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left-box {
+  width: 50%; 
+  height: 500px; 
+  position: relative;
+  margin-left: -60px;
+  margin-bottom: -120px;
+  flex-shrink: 0; 
+  aspect-ratio: 16 / 9; 
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.left-box:hover {
+  transform: scale(1.1); 
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.9); 
+  z-index: 10; 
+}
+
+.left-box video {
+  width: 120%; 
+  height: 120%;
+  transform: scale(1.05); 
+  object-fit: cover;
+  opacity: 0.8;
+  outline: none;
+  border: none;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.left-box:hover video {
+  transform: scale(1.2);
+}
+
+.right-text {
+  width: 40%;
+}
+
+.right-text h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.right-text p {
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+/* FOOTER */
+footer {
+  padding: 40px; 
+  display: flex; 
+  justify-content: center; 
+  gap: 30px; 
+  border-top: 1px solid #222;
+}
+
+footer i {
+  font-size: 20px;
+  color: #aaa;
+  transition: 0.3s;
+}
+
+footer i:hover {
+  color: #fff;
+  text-shadow: 0 0 10px #fff;
+}
+
+
+/* MOBILE FIX */
+@media(max-width:900px) {
+  .section {
+    flex-direction: column;
+  }
+  .left-box, .right-text {
+    width: 100%;
+  }
+  
+  .title-front, .title-shadow {
+    font-size: 40px; 
+  }
+  
+  .hero-title-wrapper {
+    top: 25%;
+  }
+  
+  .welcome-badge {
+    top: 15%;
+  }
+
+  header {
+    justify-content: flex-end;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo"><img src="images/logo.png" alt="Super Wheels Logo"></div>
+  <nav>
+    <a href="#">Models</a>
+    <a href="#">Find & Buy</a>
+    <a href="#">Customer Area</a>
+    <a href="#">Discover</a>
+  </nav>
+  <div class="header-controls">
+    <i class="fas fa-volume-up sound-toggle"></i>
+    
+    <i class="fas fa-search search-icon"></i>
+    
+    <div class="menu">☰</div>
+  </div>
+</header>
+
+<section class="hero">
+
+  <p class="welcome-badge"><span class="shiny-text">WELCOME TO THE DREAM DESTINATION FOR SUPERCAR LOVERS.</span></p>
+  <div class="hero-title-wrapper">
+    <h1 class="title-shadow">BUILT FOR THE 1%</h1>
+    <h1 class="title-front">BUILT FOR THE 1%</h1>
+  </div>
+  <div class="search-box">
+    <input type="text" placeholder="Search your dream car here...">
+    <button class="btn search-btn">Discover →</button>
+  </div>
+
+  <div class="car-wrapper">
+    <div class="floor-light"></div>
+    <div class="car-glow"></div><img src="images/car1.png" class="hero-car">
+
+    <div class="car-shadow"></div>
+    <div class="headlight left-outer-light"></div>
+    <div class="headlight left-inner-light"></div>
+    <div class="headlight right-inner-light"></div>
+    <div class="headlight right-outer-light"></div>
+
+    <div class="beam left-beam"></div>
+    <div class="beam right-beam"></div>
+  </div>
+
+</section>
+
+<section class="section">
+
+  <div class="left-box">
+    <video autoplay loop muted playsinline>
+      <source src="videos/porsche-headlight.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div class="right-text">
+    <h2>LET'S KEEP IT SIMPLE.</h2>
+    <p>We are the best when it comes to exotic cars. Premium selection of high-end vehicles designed for those who demand excellence.</p>
+    <button class="btn">About Us</button>
+  </div>
+
+</section>
+
+<footer>
+  <i class="fab fa-instagram"></i>
+  <i class="fab fa-facebook"></i>
+  <i class="fab fa-x-twitter"></i>
+  <i class="fab fa-youtube"></i>
+</footer>
+
+<audio id="click-sound" src="audio/click.mp3" preload="auto"></audio>
+<audio id="scroll-sound" src="audio/engine.mp3" preload="auto"></audio>
+
+<script>
+
+/* DUAL AUDIO SYSTEM & MUTE TOGGLE */
+const clickSound = document.getElementById('click-sound');
+const scrollSound = document.getElementById('scroll-sound');
+const soundToggleBtn = document.querySelector('.sound-toggle');
+const actionButtons = document.querySelectorAll('.btn');
+
+let isMuted = false; 
+
+// 1. Mute Button Logic
+soundToggleBtn.addEventListener('click', () => {
+  isMuted = !isMuted; 
+  
+  if (isMuted) {
+    soundToggleBtn.classList.remove('fa-volume-up');
+    soundToggleBtn.classList.add('fa-volume-mute');
+    
+    scrollSound.pause(); 
+  } else {
+    soundToggleBtn.classList.remove('fa-volume-mute');
+    soundToggleBtn.classList.add('fa-volume-up');
+  }
+});
+
+// 2. Click Audio (For Discover / About Us Buttons)
+actionButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (isMuted) return; 
+    
+    clickSound.currentTime = 0; 
+    clickSound.volume = 0.6; 
+    clickSound.play().catch(e => console.log("Click audio blocked."));
+  });
+});
+
+// 3. Scroll Audio (Engine Rev)
+let scrollSoundThrottle;
+window.addEventListener('scroll', () => {
+  if (isMuted || scrollSoundThrottle) return; 
+
+  scrollSound.currentTime = 0; 
+  scrollSound.volume = 0.3; 
+  scrollSound.play().catch(e => console.log("Scroll audio waiting for interaction."));
+
+  scrollSoundThrottle = setTimeout(() => {
+    scrollSoundThrottle = undefined;
+  }, 3500); 
+});
+
+
+/* HEADLIGHT CINEMATIC BLINK */
+const lights = document.querySelectorAll('.headlight');
+const beams = document.querySelectorAll('.beam');
+
+function blink() {
+  lights.forEach(l => l.classList.add('on'));
+  beams.forEach(b => b.classList.add('on'));
+
+  setTimeout(() => {
+    lights.forEach(l => l.classList.remove('on'));
+    beams.forEach(b => b.classList.remove('on'));
+  }, 800); 
+}
+
+setInterval(() => {
+  blink();
+}, Math.random() * 5000 + 4000);
+
+
+/* GSAP SCROLL ANIMATION - UPDATED TO REPLAY CONTINUOUSLY */
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.from(".hero-title-wrapper", {
+  opacity: 0, 
+  y: 80, 
+  duration: 1.5, 
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top 80%",
+    end: "bottom 20%",
+    toggleActions: "play reverse play reverse"
+  }
+});
+
+gsap.from(".welcome-badge", {
+  opacity: 0, 
+  y: 40, 
+  duration: 1, 
+  delay: 0.2,
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top 80%",
+    end: "bottom 20%",
+    toggleActions: "play reverse play reverse"
+  }
+});
+
+gsap.from(".search-box", { 
+  opacity: 0, 
+  y: 40, 
+  duration: 1, 
+  delay: 0.4,
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top 80%",
+    end: "bottom 20%",
+    toggleActions: "play reverse play reverse"
+  }
+});
+
+// The Car floats upward, triggering on scroll up AND down
+gsap.from(".car-wrapper", { 
+  opacity: 0, 
+  y: 120, 
+  duration: 1.5, 
+  ease: "power3.out",
+  delay: 0.1,
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top 80%",
+    end: "bottom 20%",
+    toggleActions: "play reverse play reverse"
+  }
+});
+
+/* PARALLAX */
+gsap.to(".hero-car", {
+  y: 50,
+  scrollTrigger: { 
+    trigger: ".hero", 
+    scrub: true 
+  }
+});
+
+/* SECOND SECTION */
+gsap.from(".left-box", {
+  x: -100, 
+  opacity: 0, 
+  duration: 1,
+  scrollTrigger: { 
+    trigger: ".section", 
+    start: "top 80%",
+    toggleActions: "play reverse play reverse"
+  }
+});
+
+gsap.from(".right-text", {
+  x: 100, 
+  opacity: 0, 
+  duration: 1,
+  scrollTrigger: { 
+    trigger: ".section", 
+    start: "top 80%",
+    toggleActions: "play reverse play reverse"
+  }
+});
+</script>
+
+</body>
+</html>
