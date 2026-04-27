@@ -1,27 +1,29 @@
 # 🏎️ Super Wheels | High-Performance Automotive UI
 
+**[Solo Project - Lead UI/UX Engineer]**
+
 ![Status: Live Deployment](https://img.shields.io/badge/Status-Live_Deployment-brightgreen?style=for-the-badge)
 ![Tech: Vanilla JS & CSS](https://img.shields.io/badge/Tech-Vanilla_JS_%26_CSS-blue?style=for-the-badge)
 ![Animation: GSAP](https://img.shields.io/badge/Animation-GSAP_Powered-orange?style=for-the-badge)
 
 **🚀 [CLICK HERE TO EXPERIENCE THE LIVE WEBSITE](https://supercar-landingpage-concept.vercel.app/) 🚀**
 
-> ## Architectural Notice:
-> This project is a high-fidelity front-end prototype. It was deliberately engineered without heavy UI frameworks (like React or Bootstrap) to demonstrate absolute mastery over native DOM manipulation, advanced CSS3 rendering physics, and raw JavaScript state management.
+> ## 🏛️ Architectural Notice:
+> This project is a high-fidelity front-end prototype. It was deliberately engineered without heavy UI frameworks (like React or Bootstrap) to build a rigorous foundational understanding of native DOM manipulation, advanced CSS rendering, and raw JavaScript state management.
 
 ---
 
-## The Vision: Awwwards-Level Digital Luxury
-Super Wheels is an interactive landing page concept for a premium exotic car brand. The goal was to break away from static, template-based web design and build a tactile, cinematic experience. By combining raw physics-based animations with deep environmental lighting, the interface feels less like a website and more like a high-end digital showroom.
+## 👁️ The Vision: Engineering Digital Luxury
+Super Wheels is an interactive landing page concept for a premium exotic car brand. The goal was to break away from static, template-based web design and build a tactile, cinematic experience. By combining advanced CSS easing with deep environmental lighting, the interface feels less like a standard website and more like a high-end digital showroom.
 
 ---
 
-## Core Engineering Features
+## ⚙️ Core Engineering Features
 
-### 1. 🎨 Advanced CSS Rendering & 3D Lighting
-* **True 3D Typography:** Engineered a heavy, physical extrusion effect using solid chrome gradients and stacked pseudo-elements to entirely bypass standard WebKit rendering bugs.
-* **Realistic Environment Blending:** Anchored transparent 2D assets into a 3D space using calculated `drop-shadow` filters, dense radial contact shadows, and fading glass floor reflections.
-* **Physics-Based Interactivity:** Implemented highly specific cubic-bezier CSS transitions to create satisfying, spring-loaded hover states and tactile button pop-outs.
+### 1. 🎨 Advanced CSS Rendering & Depth Lighting
+* **Extruded 2.5D Typography:** Engineered a heavy, physical depth effect using solid chrome gradients and stacked pseudo-elements to entirely bypass standard WebKit rendering limitations.
+* **Realistic Environment Blending:** Anchored transparent 2D assets into a faux-3D space using calculated `drop-shadow` filters, dense radial contact shadows, and fading glass floor reflections.
+* **Advanced Easing Interactivity:** Implemented highly specific cubic-bezier CSS transitions to create satisfying, spring-loaded hover states and tactile button pop-outs.
 
 ### 2. 🎬 Cinematic Scroll Animations (GSAP)
 * **Scroll-Triggered Reveals:** Utilized GSAP (GreenSock) to map opacity and Y-axis translations to the user's scroll position, ensuring elements reveal themselves with cinematic timing.
@@ -35,19 +37,15 @@ Super Wheels is an interactive landing page concept for a premium exotic car bra
 
 ---
 
-## High-Level Tech Stack
+## 🛠️ High-Level Tech Stack
 
 * **Structure:** Semantic HTML5
-* **Styling & Physics:** CSS3 (Flexbox, Transforms, CSS Variables, Advanced Gradients, Mix-Blend-Modes)
+* **Styling & Depth:** CSS3 (Flexbox, Transforms, CSS Variables, Advanced Gradients, Mix-Blend-Modes)
 * **Logic & State:** Vanilla JavaScript (ES6+)
 * **Animation Engine:** GSAP (GreenSock Animation Platform) & ScrollTrigger plugin
 
 ---
 
-## The Developer
+## 👨‍💻 The Architect
 
-Engineered and designed by:
-
-**[Debjeet Mazumder](https://github.com/KingDev4522)** *B.Tech Computer Science & Engineering*
-
-*Built with raw code, precise mathematics, and an obsession for pixel-perfect UI.*
+Engineered and designed by **[Debjeet Mazumder](https://github.com/KingDev4522)** *Built with raw code, precise mathematics, and an obsession for pixel-perfect UI.*
