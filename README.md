@@ -48,5 +48,5 @@ Super Wheels is an interactive landing page concept for a premium exotic car bra
 
 ## 👨‍💻 The Architect
 
-Engineered and designed by **[Debjeet Mazumder](https://github.com/KingDev4522)** 
+Engineered and designed by **[Debjeet Mazumder](https://github.com/KingDev4522)** <br>
 *Built with raw code, precise mathematics, and an obsession for pixel-perfect UI.*
