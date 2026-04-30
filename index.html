@@ -12,17 +12,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
-/* RESET */
+/* RESET & STRICT LAYOUT LOCK (Fixes Horizontal Scroll Leak) */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+html, body {
   background: #000;
   color: #fff;
-  overflow-x: hidden;
+  overflow-x: hidden; 
+  width: 100%;
+  max-width: 100vw;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -68,7 +70,6 @@ nav a {
 /* THE GLOW / REFLECTION EFFECT */
 nav a:hover {
   color: #fff;
-  
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
@@ -109,7 +110,7 @@ nav a:hover::after {
 .sound-toggle:hover, .search-icon:hover, .menu:hover {
   color: #fff;
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
-  transform: scale(1.15); /* Slight pop-out */
+  transform: scale(1.15); 
 }
 
 .menu {
@@ -130,8 +131,6 @@ nav a:hover::after {
   background: #000;
   background-image: radial-gradient(circle, rgba(0,0,0,0) 0%, #000 85%); 
   box-shadow: inset 0 0 150px rgba(0,0,0,1); 
-
-  
 }
 
 /* INTRO TEXT - THE FROSTED PILL BACKGROUND */
@@ -151,12 +150,12 @@ nav a:hover::after {
   font-size: 13px;
   text-transform: uppercase;
   font-weight: 600;
-  
   background: linear-gradient(90deg, #777777 0%, #ffffff 50%, #777777 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* TYPOGRAPHY OVERHAUL (Fixes Gradients & Gaps) */
 .hero-title-wrapper {
   position: absolute;
   top: 17%; 
@@ -175,15 +174,24 @@ nav a:hover::after {
   left: 0;
   top: 0;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 20px; /* Space between segments */
 }
 
+/* Sub-pixel density removes all 3D gaps */
 .title-shadow {
   color: transparent; 
   z-index: 1;
   text-shadow: 
+    0px 0.5px 0px #a0a0a0,
     0px 1px 0px #a0a0a0,  
+    0px 1.5px 0px #909090,
     0px 2px 0px #888888,  
+    0px 2.5px 0px #808080,
     0px 3px 0px #707070,  
+    0px 3.5px 0px #606060,
     0px 4px 0px #555555,  
     0px 5px 0px #3b3b3b,  
     0px 6px 0px #222222,  
@@ -192,14 +200,11 @@ nav a:hover::after {
 
 .title-front {
   z-index: 2; 
-  background: linear-gradient(
-    to bottom, 
-    #ffffff9a 20%, 
-    #a0a0a0cc 30%, 
-    #111111 50%, 
-    #dddddd10 80%, 
-    #332f2f46 90%
-  );
+}
+
+.grad-text {
+  display: inline-block;
+  background: linear-gradient(to bottom, #ffffff9a 20%, #a0a0a0cc 30%, #111111 50%, #dddddd10 80%, #332f2f46 90%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -207,7 +212,7 @@ nav a:hover::after {
 .car-wrapper {
   position: absolute;
   z-index: 3; 
-  bottom: -2vh;
+  bottom: -8vh;
   left: 50%;
   transform: translateX(-50%);
   width: 65vw;              
@@ -217,27 +222,26 @@ nav a:hover::after {
   pointer-events: none;
 }
 
-/* CAR IMAGE */
 /* CAR GLOW EFFECT */
 .floor-light {
   position: absolute;
-  bottom: 14%; 
+  bottom: 10%; 
   left: 50%;
   transform: translateX(-50%) rotateX(75deg); 
   width: 120vw;
-  height: 60vh;
+  height: 70vh;
   background: radial-gradient(ellipse at center, rgba(60, 70, 80, 0.4) 0%, rgba(0,0,0,0) 65%);
   z-index: 1; 
 }
 
 .car-shadow {
   position: absolute;
-  bottom: 16%; 
+  bottom: 8%; 
   left: 50%;
   transform: translateX(-50%);
   width: 72%; 
-  height: 20px; 
-  background: #000;
+  height: 100px; 
+  background: #000000;
   border-radius: 50%;
   box-shadow: 0 0 20px 15px #000, 0 10px 50px 30px rgba(0,0,0,0.9);
   z-index: 2; 
@@ -273,8 +277,6 @@ nav a:hover::after {
   z-index: 5; 
 }
 
-
-
 .search-box input {
   padding: 12px 20px;
   border-radius: 30px;
@@ -288,13 +290,10 @@ nav a:hover::after {
 .search-box input:hover, .search-box input:focus {
   background: linear-gradient(120deg, #b0b0b0 25%, #ffffff 50%, #b0b0b0 75%);
   background-size: 200% auto;
-  
   color: #000;
   caret-color: #000; 
-  
   box-shadow: 0 0 15px rgba(255,255,255,0.6), inset 0 0 10px rgba(255,255,255,0.8);
   transform: scale(1.05);
-  
   animation: shine 1.5s linear infinite;
 }
 
@@ -316,13 +315,10 @@ nav a:hover::after {
 /* BUTTON HOVER */
 .btn:hover, .search-btn:hover {
   background: linear-gradient(120deg, #0a0a0a 25%, #666666 50%, #0a0a0a 75%);
-  
   background-size: 200% auto;
   color: #fff;
-  
   box-shadow: 0 0 20px rgba(255,255,255,0.4), inset 0 0 10px rgba(255,255,255,0.2);
   transform: scale(1.1);
-  
   animation: shine 1.5s linear infinite;
 }
 
@@ -332,7 +328,6 @@ nav a:hover::after {
     background-position: 200% center;
   }
 }
-
 
 /* HEADLIGHT */
 .headlight {
@@ -353,7 +348,6 @@ nav a:hover::after {
 /* POSITION CONTROLS */
 .left-outer-light { left: 20.5%; bottom: 44.5%;}
 .left-inner-light { left: 26%; bottom: 43.2%; }
-
 .right-inner-light { right: 19.7%; bottom: 44.3%; }
 .right-outer-light { right: 25.7%; bottom: 43%; }
 
@@ -507,7 +501,7 @@ footer i:hover {
     padding: 0 20px;
   }
   nav {
-    display: none; /* Hide desktop nav on mobile */
+    display: none; 
   }
   .logo {
     position: static;
@@ -525,15 +519,17 @@ footer i:hover {
   }
   .title-front, .title-shadow {
     font-size: 13vw;
-    white-space: normal; /* Let text wrap naturally */
     line-height: 1.1;
+    gap: 0 10px;
   }
   .title-shadow {
+    /* Adjusted sub-pixel density for mobile screen scale */
     text-shadow: 
-      0px 1px 0px #a0a0a0,  
-      0px 2px 0px #888888,  
-      0px 3px 0px #707070,  
-      0px 10px 20px rgba(0, 0, 0, 0.9); /* Smaller shadow for mobile */
+      0px 0.5px 0px #a0a0a0,
+      0px 1px 0px #a0a0a0,
+      0px 1.5px 0px #888888,
+      0px 2px 0px #707070,
+      0px 10px 20px rgba(0, 0, 0, 0.9); 
   }
   .welcome-badge {
     top: 10%;
@@ -543,13 +539,14 @@ footer i:hover {
     font-size: 9px;
   }
 
-  /* Car Fixes */
+  /* Car Fixes (Aggressive Min-Width & No Shrinking) */
   .car-wrapper {
-    width: 130vw;
-    bottom: 12vh;
+    width: 150vw;
+    min-width: 650px; 
+    bottom: 10vh;
   }
   .car-glow {
-    filter: none; /* Remove GPU lag on mobile */
+    filter: none; 
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
   }
 
@@ -619,10 +616,13 @@ footer i:hover {
 <section class="hero">
 
   <p class="welcome-badge"><span class="shiny-text">WELCOME TO THE DREAM DESTINATION FOR SUPERCAR LOVERS.</span></p>
+  
+  <!-- UPDATED TYPOGRAPHY: Split tags lock gradients properly on wrap -->
   <div class="hero-title-wrapper">
-    <h1 class="title-shadow">BUILT FOR THE 1%</h1>
-    <h1 class="title-front">BUILT FOR THE 1%</h1>
+    <h1 class="title-shadow"><span class="grad-text">BUILT FOR</span> <span class="grad-text">THE 1%</span></h1>
+    <h1 class="title-front"><span class="grad-text">BUILT FOR</span> <span class="grad-text">THE 1%</span></h1>
   </div>
+
   <div class="search-box">
     <input type="text" placeholder="Search your dream car here...">
     <button class="btn search-btn">Discover →</button>
@@ -630,7 +630,8 @@ footer i:hover {
 
   <div class="car-wrapper">
     <div class="floor-light"></div>
-    <div class="car-glow"></div><img src="images/car1.png" class="hero-car">
+    <div class="car-glow"></div>
+    <img src="images/car1.png" class="hero-car">
 
     <div class="car-shadow"></div>
     <div class="headlight left-outer-light"></div>
@@ -672,6 +673,25 @@ footer i:hover {
 <audio id="scroll-sound" src="audio/engine.mp3" preload="auto"></audio>
 
 <script>
+
+/* =========================================
+   SILENT AUDIO UNLOCKER (Fixes Mobile Autoplay Policy)
+========================================= */
+let audioUnlocked = false;
+const unlockAudio = () => {
+  if (!audioUnlocked) {
+    scrollSound.volume = 0; 
+    scrollSound.play().then(() => {
+      scrollSound.pause();
+      scrollSound.volume = 0.3; 
+      audioUnlocked = true;
+    }).catch(e => console.log("Audio unlock pending..."));
+  }
+};
+// Listens for the very first interaction to unlock the engine sound
+window.addEventListener('click', unlockAudio, { once: true });
+window.addEventListener('touchstart', unlockAudio, { once: true });
+
 
 /* DUAL AUDIO SYSTEM & MUTE TOGGLE */
 const clickSound = document.getElementById('click-sound');
@@ -851,9 +871,9 @@ menuBtn.addEventListener('click', () => {
 /* =========================================
    GSAP 3D PARALLAX ENGINE (LANDO NORRIS EFFECT)
 ========================================= */
-// Only run on Desktop to save mobile battery and prevent bugs
 if (window.innerWidth > 900) {
-  const carImage = document.querySelector('.hero-car');
+  // Grab the car AND the lighting elements to sync them
+  const carElements = document.querySelectorAll('.hero-car, .headlight, .beam');
   const carShadow = document.querySelector('.car-shadow');
 
   document.addEventListener('mousemove', (e) => {
@@ -863,11 +883,12 @@ if (window.innerWidth > 900) {
     const moveX = (e.clientX - centerX) / centerX;
     const moveY = (e.clientY - centerY) / centerY;
 
-    const maxRotate = 6; 
-    const maxMove = 15;  
+    // Drastically reduced values to remove the "cardboard" feel
+    const maxRotate = 1.5; 
+    const maxMove = 4;  
 
-    // Using GSAP ensures this plays perfectly alongside ScrollTrigger
-    gsap.to(carImage, {
+    // Target the entire group so the headlights stay pinned to the bumper
+    gsap.to(carElements, {
       rotationY: moveX * maxRotate,
       rotationX: -moveY * maxRotate,
       x: moveX * maxMove,
@@ -877,7 +898,7 @@ if (window.innerWidth > 900) {
       overwrite: "auto"
     });
 
-    // Move shadow in opposite direction, xPercent keeps it centered!
+    // Opposite shadow math for physical depth
     gsap.to(carShadow, {
       x: -moveX * (maxMove * 1.5),
       xPercent: -50, 
@@ -887,9 +908,9 @@ if (window.innerWidth > 900) {
     });
   });
 
-  // Reset to perfect zero when mouse leaves window
   document.addEventListener('mouseleave', () => {
-    gsap.to(carImage, { rotationY: 0, rotationX: 0, x: 0, duration: 0.8, ease: "power2.out" });
+    const carElements = document.querySelectorAll('.hero-car, .headlight, .beam');
+    gsap.to(carElements, { rotationY: 0, rotationX: 0, x: 0, duration: 0.8, ease: "power2.out" });
     gsap.to(carShadow, { x: 0, xPercent: -50, duration: 0.8, ease: "power2.out" });
   });
 }
