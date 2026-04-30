@@ -463,16 +463,51 @@ footer i:hover {
 }
 
 
-/* MOBILE FIX */
-/* 📱 MOBILE ARCHITECTURE OVERHAUL */
+/* =========================================
+   MOBILE QUARANTINE OVERHAUL
+   (This ONLY applies to phones, Desktop is 100% untouched)
+========================================= */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(15px);
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s ease;
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-overlay a {
+  font-size: 24px;
+  margin: 15px 0;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
 @media(max-width:900px) {
-  /* 1. Header Cleanup: Hide text links, keep icons */
-  nav {
-    display: none; 
-  }
+  /* Header Fixes */
   header {
-    padding: 0 20px;
     justify-content: space-between;
+    padding: 0 20px;
+  }
+  nav {
+    display: none; /* Hide desktop nav on mobile */
   }
   .logo {
     position: static;
@@ -483,36 +518,48 @@ footer i:hover {
     gap: 15px;
   }
 
-  /* 2. Typography: Force single line, scale to viewport */
+  /* Typography Fixes */
   .hero-title-wrapper {
-    top: 20%;
+    top: 18%;
+    padding: 0 15px;
   }
   .title-front, .title-shadow {
-    font-size: 11vw; /* Fluid typography */
-    white-space: nowrap; /* PREVENTS UGLY TEXT WRAPPING */
-    letter-spacing: 0px;
+    font-size: 13vw;
+    white-space: normal; /* Let text wrap naturally */
+    line-height: 1.1;
+  }
+  .title-shadow {
+    text-shadow: 
+      0px 1px 0px #a0a0a0,  
+      0px 2px 0px #888888,  
+      0px 3px 0px #707070,  
+      0px 10px 20px rgba(0, 0, 0, 0.9); /* Smaller shadow for mobile */
   }
   .welcome-badge {
-    top: 12%;
+    top: 10%;
     padding: 8px 15px;
   }
   .shiny-text {
-    font-size: 9px; /* Smaller badge text for mobile */
+    font-size: 9px;
   }
 
-  /* 3. The Car: Make it aggressive (Bleed off edges) */
+  /* Car Fixes */
   .car-wrapper {
-    width: 160vw; /* Massive scale to make it look imposing on a narrow screen */
-    bottom: 15vh; /* Push it up so it doesn't collide with the stacked search bar */
+    width: 130vw;
+    bottom: 12vh;
+  }
+  .car-glow {
+    filter: none; /* Remove GPU lag on mobile */
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
   }
 
-  /* 4. Search Box: Stack and expand */
+  /* Search Box Fixes */
   .search-box {
     top: auto;
-    bottom: 5%;
+    bottom: 3%;
     flex-direction: column;
     width: 90%;
-    gap: 15px;
+    gap: 10px;
   }
   .search-box input {
     width: 100%;
@@ -522,17 +569,19 @@ footer i:hover {
     width: 100%;
   }
 
-  /* 5. Second Section Layout */
+  /* Video Section Fixes */
   .section {
-    padding: 80px 20px;
+    padding: 60px 0;
     flex-direction: column;
   }
   .left-box {
-    width: 100%;
-    margin: 0 0 40px 0;
+    width: 100vw;
+    margin: 0 0 30px 0;
+    border-radius: 0;
   }
   .right-text {
     width: 100%;
+    padding: 0 25px;
     text-align: center;
   }
 }
@@ -558,6 +607,14 @@ footer i:hover {
     <div class="menu">☰</div>
   </div>
 </header>
+
+<!-- HIDDEN MOBILE MENU -->
+<div class="mobile-nav-overlay">
+  <a href="#">Models</a>
+  <a href="#">Find & Buy</a>
+  <a href="#">Customer Area</a>
+  <a href="#">Discover</a>
+</div>
 
 <section class="hero">
 
@@ -772,6 +829,71 @@ gsap.from(".right-text", {
     toggleActions: "play reverse play reverse"
   }
 });
+
+/* =========================================
+   MOBILE MENU ENGINE
+========================================= */
+const menuBtn = document.querySelector('.menu');
+const mobileOverlay = document.querySelector('.mobile-nav-overlay');
+let menuOpen = false;
+
+menuBtn.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  if (menuOpen) {
+    mobileOverlay.classList.add('active');
+    menuBtn.innerHTML = '✕'; 
+  } else {
+    mobileOverlay.classList.remove('active');
+    menuBtn.innerHTML = '☰'; 
+  }
+});
+
+/* =========================================
+   GSAP 3D PARALLAX ENGINE (LANDO NORRIS EFFECT)
+========================================= */
+// Only run on Desktop to save mobile battery and prevent bugs
+if (window.innerWidth > 900) {
+  const carImage = document.querySelector('.hero-car');
+  const carShadow = document.querySelector('.car-shadow');
+
+  document.addEventListener('mousemove', (e) => {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    const moveX = (e.clientX - centerX) / centerX;
+    const moveY = (e.clientY - centerY) / centerY;
+
+    const maxRotate = 6; 
+    const maxMove = 15;  
+
+    // Using GSAP ensures this plays perfectly alongside ScrollTrigger
+    gsap.to(carImage, {
+      rotationY: moveX * maxRotate,
+      rotationX: -moveY * maxRotate,
+      x: moveX * maxMove,
+      transformPerspective: 1000,
+      duration: 0.4,
+      ease: "power2.out",
+      overwrite: "auto"
+    });
+
+    // Move shadow in opposite direction, xPercent keeps it centered!
+    gsap.to(carShadow, {
+      x: -moveX * (maxMove * 1.5),
+      xPercent: -50, 
+      duration: 0.4,
+      ease: "power2.out",
+      overwrite: "auto"
+    });
+  });
+
+  // Reset to perfect zero when mouse leaves window
+  document.addEventListener('mouseleave', () => {
+    gsap.to(carImage, { rotationY: 0, rotationX: 0, x: 0, duration: 0.8, ease: "power2.out" });
+    gsap.to(carShadow, { x: 0, xPercent: -50, duration: 0.8, ease: "power2.out" });
+  });
+}
+
 </script>
 
 </body>
